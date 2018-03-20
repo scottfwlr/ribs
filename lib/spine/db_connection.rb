@@ -1,9 +1,9 @@
 require 'sqlite3'
 
-# https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
-ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
-
 class DB
+
+  ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
+  BOOKS = 'books.db'
 
   # overwrite 'new' to make this a singleton
   def new
@@ -17,16 +17,21 @@ class DB
     @db
   end
 
+  def self.db
+    self.open(BOOKS) if @db.nil?
+    @db
+  end
+
   def self.execute(*args)
-    @db.execute(*args)
+    self.db.execute(*args)
   end
 
   def self.execute2(*args)
-    @db.execute2(*args)
+    self.db.execute2(*args)
   end
 
   def self.last_insert_row_id
-    @db.last_insert_row_id
+    self.db.last_insert_row_id
   end
 
 end
