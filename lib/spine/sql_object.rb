@@ -1,11 +1,13 @@
 require_relative 'db_connection'
 require_relative 'inflector'
 require_relative 'searchable'
+require_relative 'associatable'
 
 
 class SQLObject
 
   extend Searchable
+  extend Associatable
 
   # class methods
 
