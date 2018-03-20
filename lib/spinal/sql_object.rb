@@ -4,7 +4,7 @@ require_relative 'searchable'
 require_relative 'associatable'
 
 
-class SQLObject
+class Spine
 
   extend Searchable
   extend Associatable
@@ -38,7 +38,7 @@ class SQLObject
   end
 
   def self.parse(results)
-    results.map { |params| self.new([params]) }
+    results.map { |params| self.new(params) }
   end
 
   def self.find(id)
