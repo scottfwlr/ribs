@@ -4,7 +4,9 @@ require_relative 'inflector'
 
 class SQLObject
 
-  DB.open('books.db')
+
+  # class methods
+
 
   def self.columns
     SQL = """
@@ -50,5 +52,60 @@ class SQLObject
     self.new(results.first) unless results.empty?
   end
 
+
+  # instance methods 
+
+
+  def columns
+    self.class.columns
+  end
+
+  def table_name
+    self.class.table_name
+  end
+
+  def initialize(params = {})
+    params.each do |key, val|
+      raise "unknown attribute '#{key}'" unless columns.include?(key.to_sym)
+      send("#{key}=".to_sym, val)
+    end
+  end
+
+  def attributes
+    @attributes ||= {}
+  end
+
+  def attribute_values
+    columns.map { |attrb| send(attrb) }
+  end
+
+  def insert
+    SQL = """
+    INSERT INTO
+      #{table_name} #{columns.join(', ')}
+    VALUES
+      (#{columns.map { '?' }.join(', ')})
+    """
+
+    DB.execute(SQL, *attribute_values)
+    self.id = DB.last_insert_row_id
+  end
+
+  def update
+    set_line = columns.map { |col| "#{col} = ?" }.join(', ')
+    SQL = """
+    UPDATE 
+      #{table_name}
+    SET 
+      #{set_line}
+    WHERE
+      id = ?
+    """
+    DB.execute(SQL, *attribute_values, self.id)
+  end
+
+  def save
+    self.id ? update : insert
+  end
 
 end

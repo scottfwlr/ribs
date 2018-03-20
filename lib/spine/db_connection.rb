@@ -3,7 +3,7 @@ require 'sqlite3'
 class DB
 
   ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
-  BOOKS = 'books.db'
+  BOOKS = File.join(ROOT_FOLDER, 'books.db')
 
   # overwrite 'new' to make this a singleton
   def new
