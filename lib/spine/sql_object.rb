@@ -4,9 +4,7 @@ require_relative 'inflector'
 
 class SQLObject
 
-
   # class methods
-
 
   def self.columns
     SQL = """
@@ -47,14 +45,11 @@ class SQLObject
     WHERE
       id = ?
     """
-
     results = DB.execute(SQL, id)
     self.new(results.first) unless results.empty?
   end
 
-
   # instance methods 
-
 
   def columns
     self.class.columns
@@ -86,7 +81,6 @@ class SQLObject
     VALUES
       (#{columns.map { '?' }.join(', ')})
     """
-
     DB.execute(SQL, *attribute_values)
     self.id = DB.last_insert_row_id
   end
