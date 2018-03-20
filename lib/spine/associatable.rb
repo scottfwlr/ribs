@@ -31,13 +31,6 @@ module Associatable
     define_method(name) do
       source = through.model_class.assoc_options[source_name]
 
-      # source_table = source_options.table_name
-      # through_table = through_options.table_name
-      # source_foreign_key = source_options.foreign_key
-      # through_foreign_key = through_options.foreign_key
-      # source_primary_id = source_options.primary_key
-      # through_primary_id = through_options.primary_key
-
       SQL = """
         SELECT
           #{source.table_name}.*
@@ -52,7 +45,7 @@ module Associatable
       """
 
       results = DB.execute(SQL, send(through.foreign_key))
-      
+
       source.model_class.parse(results).first
     end
   end
