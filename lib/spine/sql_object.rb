@@ -1,19 +1,22 @@
 require_relative 'db_connection'
 require_relative 'inflector'
+require_relative 'searchable'
 
 
 class SQLObject
+
+  extend Searchable
 
   # class methods
 
   def self.columns
     SQL = """
-    SELECT 
-      *
-    FROM 
-      #{self.table_name}
-    LIMIT 
-      1
+      SELECT 
+        *
+      FROM 
+        #{self.table_name}
+      LIMIT 
+        1
     """
 
     @columns ||= DB.execute2(SQL).first.map(&:to_sym)
@@ -38,12 +41,12 @@ class SQLObject
 
   def self.find(id)
     SQL = """
-    SELECT 
-      *
-    FROM 
-      #{self.table_name}
-    WHERE
-      id = ?
+      SELECT 
+        *
+      FROM 
+        #{self.table_name}
+      WHERE
+        id = ?
     """
     results = DB.execute(SQL, id)
     self.new(results.first) unless results.empty?
@@ -76,10 +79,10 @@ class SQLObject
 
   def insert
     SQL = """
-    INSERT INTO
-      #{table_name} #{columns.join(', ')}
-    VALUES
-      (#{columns.map { '?' }.join(', ')})
+      INSERT INTO
+        #{table_name} #{columns.join(', ')}
+      VALUES
+        (#{columns.map { '?' }.join(', ')})
     """
     DB.execute(SQL, *attribute_values)
     self.id = DB.last_insert_row_id
@@ -88,12 +91,12 @@ class SQLObject
   def update
     set_line = columns.map { |col| "#{col} = ?" }.join(', ')
     SQL = """
-    UPDATE 
-      #{table_name}
-    SET 
-      #{set_line}
-    WHERE
-      id = ?
+      UPDATE 
+        #{table_name}
+      SET 
+        #{set_line}
+      WHERE
+        id = ?
     """
     DB.execute(SQL, *attribute_values, self.id)
   end
