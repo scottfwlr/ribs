@@ -2,8 +2,8 @@ require 'sqlite3'
 
 class DB
 
-  ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
-  BOOKS = File.join(ROOT_FOLDER, 'books.db')
+  ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
+  PAPERS = File.join(ROOT_FOLDER, 'db/papers.db')
 
   # overwrite 'new' to make this a singleton
   def new
@@ -18,7 +18,7 @@ class DB
   end
 
   def self.db
-    self.open(BOOKS) if @db.nil?
+    self.open(PAPERS) if @db.nil?
     @db
   end
 

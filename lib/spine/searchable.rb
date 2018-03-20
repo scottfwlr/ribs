@@ -2,7 +2,7 @@ module Searchable
 
   def where(params)
     cond_line = params.keys.map { |col| "#{col} = ?"}.join(' AND ')
-    SQL = """
+    sql = """
       SELECT
         *
       FROM
@@ -11,6 +11,6 @@ module Searchable
         #{cond_line}
     """
 
-    self.parse(DB.execute(SQL, *params.values))
+    self.parse(DB.execute(sql, *params.values))
   end
 end

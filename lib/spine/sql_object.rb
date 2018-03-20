@@ -12,7 +12,7 @@ class SQLObject
   # class methods
 
   def self.columns
-    SQL = """
+    sql = """
       SELECT 
         *
       FROM 
@@ -21,7 +21,7 @@ class SQLObject
         1
     """
 
-    @columns ||= DB.execute2(SQL).first.map(&:to_sym)
+    @columns ||= DB.execute2(sql).first.map(&:to_sym)
   end
 
   def self.finalize!
@@ -42,7 +42,7 @@ class SQLObject
   end
 
   def self.find(id)
-    SQL = """
+    sql = """
       SELECT 
         *
       FROM 
@@ -50,7 +50,7 @@ class SQLObject
       WHERE
         id = ?
     """
-    results = DB.execute(SQL, id)
+    results = DB.execute(sql, id)
     self.new(results.first) unless results.empty?
   end
 
@@ -80,19 +80,19 @@ class SQLObject
   end
 
   def insert
-    SQL = """
+    sql = """
       INSERT INTO
         #{table_name} #{columns.join(', ')}
       VALUES
         (#{columns.map { '?' }.join(', ')})
     """
-    DB.execute(SQL, *attribute_values)
+    DB.execute(sql, *attribute_values)
     self.id = DB.last_insert_row_id
   end
 
   def update
     set_line = columns.map { |col| "#{col} = ?" }.join(', ')
-    SQL = """
+    sql = """
       UPDATE 
         #{table_name}
       SET 
@@ -100,7 +100,7 @@ class SQLObject
       WHERE
         id = ?
     """
-    DB.execute(SQL, *attribute_values, self.id)
+    DB.execute(sql, *attribute_values, self.id)
   end
 
   def save

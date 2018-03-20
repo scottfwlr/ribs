@@ -31,7 +31,7 @@ module Associatable
     define_method(name) do
       source = through.model_class.assoc_options[source_name]
 
-      SQL = """
+      sql = """
         SELECT
           #{source.table_name}.*
         FROM
@@ -44,7 +44,7 @@ module Associatable
           1
       """
 
-      results = DB.execute(SQL, send(through.foreign_key))
+      results = DB.execute(sql, send(through.foreign_key))
 
       source.model_class.parse(results).first
     end
