@@ -1,9 +1,9 @@
 `rm db/papers.db`
 `cat db/papers.sql | sqlite3 db/papers.db`
 
-require_relative "../lib/spine"
+require_relative "../lib/guts"
 
-class Paper < Spine 
+class Paper < Guts
   belongs_to :author,
     foreign_key: :author_id,
     class_name: 'Scientist'
@@ -12,7 +12,7 @@ class Paper < Spine
 end
 
 
-class Scientist < Spine
+class Scientist < Guts
   belongs_to :institute,
     foreign_key: :institute_id,
     class_name: 'Institute'
@@ -24,7 +24,7 @@ class Scientist < Spine
   finalize!
 end
 
-class Institute < Spine 
+class Institute < Guts 
 
   finalize!
 end

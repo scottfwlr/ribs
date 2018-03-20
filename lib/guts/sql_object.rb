@@ -4,7 +4,7 @@ require_relative 'searchable'
 require_relative 'associatable'
 
 
-class Spine
+class Guts
 
   extend Searchable
   extend Associatable
