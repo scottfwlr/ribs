@@ -35,7 +35,7 @@ class Controller
   def invoke_action(name)
     check_csrf if should_check_csrf
     self.send(name)
-    render(name.to_s) unless already_built_response?
+    render(name.to_s) unless @already_built_response
   end
 
   def redirect_to(url)
@@ -53,13 +53,22 @@ class Controller
   end
 
   def render(template)
-    template = File.read("views/#{Inflect.declassify(self.class.to_s)}/#{template}.html.erb")
+    template = File.read("views/#{Inflect.controller(self.class.to_s)}/#{template}.html.erb")
     content = ERB.new(template).result(binding)
     render_content(content, 'text/html')
   end
 
   def form_csrf_token
     csrf
+  end
+
+  def url_for(obj, text: 'link')
+    obj_base = Inflect.url(obj.class.to_s)
+    "<a href='/#{obj_base}/#{obj.id}'>#{text}</a>"
+  end
+
+  def url_to(string, text: 'link')
+    "<a href='#{string}'>#{text}</a>"
   end
 
   private

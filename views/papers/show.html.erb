@@ -1,0 +1,5 @@
+<h1> <%= @paper.title %> </h1>
+<h2> <%= url_for @paper.author, text: @paper.author.fname + " " + @paper.author.lname %> </h2>
+
+
+<%= url_to '/', text: 'home' %>

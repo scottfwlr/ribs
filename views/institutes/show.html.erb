@@ -1,0 +1,10 @@
+<h1> <%= @institute.name %> </h1>
+
+<ul>
+  <% @institute.scientists.each do |author| %>
+    <li> <%= url_for author, text: author.fname + " " + author.lname %> </li>
+  <% end %>
+</ul>
+
+
+<%= url_to '/', text: 'home' %>

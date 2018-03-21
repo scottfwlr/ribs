@@ -1,0 +1,9 @@
+<h1>Institutes</h1>
+
+<ul>
+<% @institutes.each do |institute| %>
+    <li><%= url_for(institute, text: institute.name) %></li>
+<% end %>
+</ul>
+
+<%= url_to '/', text: 'home' %>

@@ -7,7 +7,7 @@ class Route
   end
 
   def self.wildcard(str)
-    "(?<#{str[1..-1]}>\w+)" if str[0] == ":"
+    "(?<#{str[1..-1]}>[^/]+)" if str[0] == ":"
   end
 
   attr_reader :pattern, :http_verb, :controller, :action
@@ -24,7 +24,7 @@ class Route
   end
 
   def named_captures(matchdata)
-    matchdata.names.zip(matchdata.captures).to_h
+    matchdata.names.map(&:to_sym).zip(matchdata.captures).to_h
   end
 
   def run(req, resp)

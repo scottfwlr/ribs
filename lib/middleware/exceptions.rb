@@ -5,7 +5,7 @@ class ShowExceptions < Middleware
   def call(env)
     app.call(env)
   rescue StandardError => e
-    ['500', {'Content-type' => 'text/html'}, [e.message, e.backtrace, excerpt_source(e)]]
+    ['500', {'Content-type' => 'text/html'}, [e.message, e.backtrace, excerpt_source(e)].flatten]
   end
 
   private

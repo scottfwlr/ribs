@@ -1,0 +1,9 @@
+<h1>Scientists</h1>
+
+<ul>
+<% @scientists.each do |scientist| %>
+    <li><%= url_for scientist, text: scientist.fname + " " + scientist.lname %></li>
+<% end %>
+</ul>
+
+<%= url_to '/', text: 'home' %>

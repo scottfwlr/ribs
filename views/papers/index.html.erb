@@ -1,0 +1,9 @@
+<h1>Papers</h1>
+
+<ul>
+<% @papers.each do |paper| %>
+    <li><%= url_for paper, text: paper.title %></li>
+<% end %>
+</ul>
+
+<%= url_to '/', text: 'home' %>

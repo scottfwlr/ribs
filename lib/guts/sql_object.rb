@@ -41,6 +41,16 @@ class Guts
     results.map { |params| self.new(params) }
   end
 
+  def self.all
+    sql = """
+      SELECT
+        *
+      FROM
+        #{self.table_name}
+    """
+    self.parse(DB.execute(sql))
+  end
+
   def self.find(id)
     sql = """
       SELECT 

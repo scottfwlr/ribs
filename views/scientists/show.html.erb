@@ -1,0 +1,11 @@
+<h1> <%= @scientist.fname + " " + @scientist.lname %> </h1>
+
+<h3> <%= url_for @scientist.institute, text: @scientist.institute.name %> </h3>
+
+<ul>
+  <% @scientist.papers.each do |paper| %>
+    <li> <%= url_for paper, text: paper.title %> </li>
+  <% end %>
+</ul>
+
+<%= url_to '/', text: 'home' %>

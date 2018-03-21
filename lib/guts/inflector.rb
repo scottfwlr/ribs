@@ -28,6 +28,10 @@ class Inflect
     self.underscore(string.split("::").last)
   end
 
+  def self.controller(string)
+    self.declassify( string[/(.+)Controller/, 1] )
+  end
+
   def self.constant(string)
     Object.const_get(self.camelcase(string))
   end
@@ -38,6 +42,10 @@ class Inflect
 
   def self.class_name(string)
     self.singular(self.camelcase(string))
+  end
+
+  def self.url(string)
+    self.plural(string.downcase)
   end
 
 end
