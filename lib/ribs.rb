@@ -1,2 +1,5 @@
-require_relative 'guts'
-require_relative 'controller'
+require_relative 'guts/guts'
+require_relative 'controller/controller'
+require_relative 'controller/static_controller'
+require_relative 'middleware/static'
+require_relative 'middleware/exceptions'

@@ -24,6 +24,10 @@ class Inflect
     string.scan(/[A-Z][a-z]+/).map(&:downcase).join("_")
   end
 
+  def self.declassify(string)
+    self.underscore(string.split("::").last)
+  end
+
   def self.constant(string)
     Object.const_get(self.camelcase(string))
   end
