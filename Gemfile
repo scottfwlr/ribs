@@ -5,3 +5,6 @@ gem 'sqlite3'
 
 # html templating engine
 gem 'erb'
+
+# server
+gem 'rack'

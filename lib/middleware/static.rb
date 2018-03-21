@@ -1,3 +1,4 @@
+require 'rack'
 require_relative 'middleware'
 
 class Static < Middleware
