@@ -5,8 +5,6 @@ class DB
   # ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
   # PAPERS = File.join(ROOT_FOLDER, 'db/papers.db')
 
-  PAPERS = 'papers'
-
   # overwrite 'new' to make this a singleton
   def new
     self
@@ -21,7 +19,7 @@ class DB
   end
 
   def self.db
-    self.open(PAPERS) if @db.nil?
+    self.open(ENV['DATABASE_URL']) if @db.nil?
     @db
   end
 
