@@ -12,7 +12,7 @@ class DB
 
   def self.open(db_file_name)
     # @db = SQLite3::Database.new(db_file_name)
-    @db = PG.connect(dbname: db_file_name, host: 'localhost')
+    @db = PG.connect(dbname: db_file_name, host: ENV['DATABASE_HOST'] || 'localhost')
     # @db.results_as_hash = true
     # @db.type_translation = true
     @db
