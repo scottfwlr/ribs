@@ -49,4 +49,4 @@ app = Rack::Builder.new do
   run app
 end.to_app
 
-Rack::Server.start(app: app, Port: 3210) 
+Rack::Server.start(app: app, Port: ARGV.first.to_i) 
