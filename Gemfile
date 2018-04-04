@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
-# sqlite3 for the database
-# gem 'sqlite3'
-
-# postgresql for the database
+# for comprehending the postgresql database
 gem 'pg'
 
-# server
+# for comprehending http requests/responses
 gem 'rack'
+
+# the server
 gem 'puma'
