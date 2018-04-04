@@ -1,9 +1,11 @@
-require 'sqlite3'
+require 'pg'
 
 class DB
 
-  ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
-  PAPERS = File.join(ROOT_FOLDER, 'db/papers.db')
+  # ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
+  # PAPERS = File.join(ROOT_FOLDER, 'db/papers.db')
+
+  PAPERS = 'papers'
 
   # overwrite 'new' to make this a singleton
   def new
@@ -11,9 +13,10 @@ class DB
   end
 
   def self.open(db_file_name)
-    @db = SQLite3::Database.new(db_file_name)
-    @db.results_as_hash = true
-    @db.type_translation = true
+    # @db = SQLite3::Database.new(db_file_name)
+    @db = PG.connect(db_file_name)
+    # @db.results_as_hash = true
+    # @db.type_translation = true
     @db
   end
 
