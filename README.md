@@ -2,6 +2,8 @@
 
 ## [Live demo](http://ribs-live-example.herokuapp.com/)
 
+This is a website built with Ribs, being served live from a Heroku server. When you navigate to a page, Ribs is fetching the appropriate data from a SQL database and rendering HTML to be sent back to you.
+
 ### Ribs is a Ruby framework for building web apps. 
 
 Ribs follows the Model-View-Controller convention:
