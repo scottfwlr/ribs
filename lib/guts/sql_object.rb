@@ -21,7 +21,7 @@ class Guts
         1
     """
 
-    @columns ||= DB.execute2(sql).first.map(&:to_sym)
+    @columns ||= DB.execute2(sql).first.keys.map(&:to_sym)
   end
 
   def self.finalize!
@@ -60,8 +60,8 @@ class Guts
       WHERE
         id = ?
     """
-    results = DB.execute(sql, id)
-    self.new(results.first) unless results.empty?
+    results = DB.execute(sql, id.to_i)
+    self.new(results.first) unless results.values.flatten.empty?
   end
 
   # instance methods 
