@@ -1,8 +1,8 @@
 # Ribs
 
-## Ribs is a Ruby framework for building web apps. 
+## [Live demo](http://ribs-live-example.herokuapp.com/)
 
-### [Live demo](http://ribs-live-example.herokuapp.com/)
+### Ribs is a Ruby framework for building web apps. 
 
 Ribs follows the Model-View-Controller convention:
  - [*Models*](lib/guts/) represent and encapsulate the data in your database.
